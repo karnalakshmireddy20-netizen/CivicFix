@@ -78,7 +78,7 @@ public class IssueService {
     }
 
     public IssueResponse getIssueById(Long id, String userEmail) {
-        Issue issue = issueRepository.findById(id)
+        Issue issue = issueRepository.findByIdWithAssociations(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Issue not found with id: " + id));
 
         User user = findUserByEmail(userEmail);
@@ -112,14 +112,14 @@ public class IssueService {
     }
 
     public IssueResponse getIssueByIdAdmin(Long id) {
-        Issue issue = issueRepository.findById(id)
+        Issue issue = issueRepository.findByIdWithAssociations(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Issue not found with id: " + id));
         return IssueResponse.from(issue);
     }
 
     @Transactional
     public IssueResponse updateStatus(Long id, AdminUpdateRequest request, String adminEmail) {
-        Issue issue = issueRepository.findById(id)
+        Issue issue = issueRepository.findByIdWithAssociations(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Issue not found with id: " + id));
 
         Issue.Status oldStatus = issue.getStatus();
@@ -148,7 +148,7 @@ public class IssueService {
 
     @Transactional
     public IssueResponse assignDepartment(Long id, AdminUpdateRequest request, String adminEmail) {
-        Issue issue = issueRepository.findById(id)
+        Issue issue = issueRepository.findByIdWithAssociations(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Issue not found with id: " + id));
 
         if (request.getDepartmentId() == null) {
@@ -167,7 +167,7 @@ public class IssueService {
 
     @Transactional
     public IssueResponse updateRemarks(Long id, AdminUpdateRequest request, String adminEmail) {
-        Issue issue = issueRepository.findById(id)
+        Issue issue = issueRepository.findByIdWithAssociations(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Issue not found with id: " + id));
 
         issue.setAdminRemarks(request.getAdminRemarks());
