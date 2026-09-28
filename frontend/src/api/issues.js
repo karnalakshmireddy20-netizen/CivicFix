@@ -10,7 +10,7 @@ export const getMyIssues = () => api.get('/api/issues/my')
 
 export const getIssueById = (id) => api.get(`/api/issues/${id}`)
 
-// ─── Admin ──────────────────────────────────────────────────────────────────
+// ─── Admin — Issues ──────────────────────────────────────────────────────────
 export const getAllIssues = (params) => api.get('/api/admin/issues', { params })
 
 export const getAdminIssueById = (id) => api.get(`/api/admin/issues/${id}`)
@@ -27,3 +27,9 @@ export const updateRemarks = (id, data) =>
 export const getAdminDashboard = () => api.get('/api/admin/dashboard')
 
 export const getDepartments = () => api.get('/api/admin/departments')
+
+// ─── Admin — Users ───────────────────────────────────────────────────────────
+export const listAdminUsers = (role) =>
+  api.get('/api/admin/users', { params: role ? { role } : {} })
+
+export const createAdminUser = (data) => api.post('/api/admin/users', data)

@@ -20,6 +20,7 @@ import IssueDetailPage  from './pages/citizen/IssueDetailPage'
 import AdminDashboard   from './pages/admin/AdminDashboard'
 import AllIssuesPage    from './pages/admin/AllIssuesPage'
 import ManageIssuePage  from './pages/admin/ManageIssuePage'
+import ManageAdminsPage from './pages/admin/ManageAdminsPage'
 
 export default function App() {
   return (
@@ -58,6 +59,9 @@ export default function App() {
           } />
           <Route path="/admin/issues/:id" element={
             <RequireAdmin><ManageIssuePage /></RequireAdmin>
+          } />
+          <Route path="/admin/users" element={
+            <RequireAdmin><ManageAdminsPage /></RequireAdmin>
           } />
 
           {/* Fallback */}

@@ -43,6 +43,7 @@ export default function Navbar() {
             <>
               <Link to="/admin/dashboard">Dashboard</Link>
               <Link to="/admin/issues">All Issues</Link>
+              <Link to="/admin/users">Manage Admins</Link>
               <div className="navbar-user">
                 <span className="navbar-user-name">🔧 {user.name}</span>
                 <button onClick={handleLogout} className="btn btn-secondary btn-sm">Logout</button>

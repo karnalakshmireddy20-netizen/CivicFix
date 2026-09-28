@@ -1,16 +1,21 @@
 package com.civicfix.backend.controller;
 
 import com.civicfix.backend.dto.AdminUpdateRequest;
+import com.civicfix.backend.dto.CreateAdminRequest;
 import com.civicfix.backend.dto.DashboardResponse;
 import com.civicfix.backend.dto.IssueResponse;
+import com.civicfix.backend.dto.UserResponse;
 import com.civicfix.backend.entity.Department;
+import com.civicfix.backend.service.AdminUserService;
 import com.civicfix.backend.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -21,6 +26,9 @@ public class AdminController {
 
     @Autowired
     private IssueService issueService;
+
+    @Autowired
+    private AdminUserService adminUserService;
 
     /**
      * GET /api/admin/dashboard — dashboard statistics
@@ -87,5 +95,24 @@ public class AdminController {
     @GetMapping("/departments")
     public ResponseEntity<List<Department>> getDepartments() {
         return ResponseEntity.ok(issueService.getAllDepartments());
+    }
+
+    /**
+     * GET /api/admin/users — list all users (optionally filter by ?role=ADMIN or ?role=CITIZEN)
+     */
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponse>> listUsers(
+            @RequestParam(required = false) String role) {
+        return ResponseEntity.ok(adminUserService.listUsers(role));
+    }
+
+    /**
+     * POST /api/admin/users — create a new ADMIN account (only existing admins can do this)
+     */
+    @PostMapping("/users")
+    public ResponseEntity<UserResponse> createAdmin(
+            @Valid @RequestBody CreateAdminRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(adminUserService.createAdmin(request));
     }
 }
