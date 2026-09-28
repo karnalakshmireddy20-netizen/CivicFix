@@ -1,0 +1,81 @@
+# =============================================================================
+# CivicFix — .gitignore
+# =============================================================================
+
+# ─── Java / Maven ─────────────────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# ─── Spring Boot Secrets ──────────────────────────────────────────────────────
+# Local override file that contains real DB password — NEVER commit
+backend/src/main/resources/application-local.properties
+application-local.properties
+
+# ─── Node / React ─────────────────────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# ─── Environment / Secret files ───────────────────────────────────────────────
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+frontend/.env.production.local
+
+# Keep example files (safe — contain placeholders only)
+!.env.example
+!frontend/.env.example
+!backend/src/main/resources/application-local.properties.example
+
+# ─── Uploaded files (user content) ───────────────────────────────────────────
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ─── IDE / Editor ─────────────────────────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.classpath
+.settings/
+.factorypath
+*.launch
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+log/
+
+# ─── Misc ─────────────────────────────────────────────────────────────────────
+*.tmp
+*.bak
+*.swp
+*.orig
